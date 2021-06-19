@@ -9,12 +9,10 @@ module.exports = {
 
       let hashedPassword = await bcrypt.hash(req.body.password, salted);
 
-      const { email, firstName, lastName, mobileNumber } = req.body;
+      const { username, email } = req.body;
 
       let createdUser = new User({
-        firstName,
-        lastName,
-        mobileNumber,
+        username,
         email,
         password: hashedPassword,
       });
@@ -33,12 +31,14 @@ module.exports = {
 
   login: async (req, res) => {
     try {
+      console.log("Backend 34");
       let foundUser = await User.findOne({ email: req.body.email });
+
       if (!foundUser) {
         throw "User does not exist!";
       }
 
-      let comparePassword = await bcrypt.compare(
+      const comparePassword = await bcrypt.compare(
         req.body.password,
         foundUser.password
       );
@@ -64,14 +64,6 @@ module.exports = {
       });
     } catch (error) {
       res.status(500).json({ Message: error.message });
-    }
-  },
-
-  checkUserIsLoggedIn: (req, res) => {
-    try {
-      console.log("fuck");
-    } catch (error) {
-      console.log(error);
     }
   },
 };
