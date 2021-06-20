@@ -31,7 +31,6 @@ module.exports = {
 
   login: async (req, res) => {
     try {
-      console.log("Backend 34");
       let foundUser = await User.findOne({ email: req.body.email });
 
       if (!foundUser) {
