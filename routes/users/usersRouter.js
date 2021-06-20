@@ -8,8 +8,8 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-router.post("/sign-up", signUp);
+router.post("/api/sign-up", signUp);
 
-router.post("/login", login);
+router.post("/api/login", login);
 
 module.exports = router;
